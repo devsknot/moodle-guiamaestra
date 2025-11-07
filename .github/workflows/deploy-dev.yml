@@ -1,0 +1,86 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Dev Server
+    runs-on: ubuntu-latest
+    environment: guiamaestra-dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.1.0
+        env:
+          REPO_PATH: ${{ secrets.REPO_PATH }}
+          INFRASTRUCTURE_PATH: ${{ secrets.INFRASTRUCTURE_PATH }}
+          COMPOSE_FILE: ${{ secrets.COMPOSE_FILE }}
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          BRANCH_NAME: ${{ secrets.BRANCH_NAME }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
+          port: 22
+          envs: REPO_PATH,INFRASTRUCTURE_PATH,COMPOSE_FILE,SERVICE_NAME,BRANCH_NAME
+          script: |
+            echo "🚀 Starting deployment to Development Environment"
+            
+            # Pull latest code
+            echo "📥 Pulling latest code..."
+            cd $REPO_PATH
+            
+            # Reset any local changes
+            git reset --hard
+            git clean -fd
+            
+            # Checkout and pull
+            git checkout $BRANCH_NAME
+            git fetch origin
+            git reset --hard origin/$BRANCH_NAME
+            
+            echo "✅ Code updated to latest commit"
+            git log -1 --oneline
+            
+            # Go to infrastructure directory and rebuild
+            echo "🔨 Rebuilding $SERVICE_NAME container..."
+            cd $INFRASTRUCTURE_PATH
+            docker compose --env-file .env.dev -f $COMPOSE_FILE build --no-cache $SERVICE_NAME
+            docker compose --env-file .env.dev -f $COMPOSE_FILE up -d --no-deps $SERVICE_NAME
+            
+            # Show status
+            echo "📊 Container status:"
+            docker compose --env-file .env.dev -f $COMPOSE_FILE ps $SERVICE_NAME
+            
+            # Clean Moodle cache
+            echo "🧹 Cleaning Moodle cache..."
+            docker compose --env-file .env.dev -f $COMPOSE_FILE exec -T $SERVICE_NAME php /var/www/html/admin/cli/purge_caches.php || true
+            
+            # Show logs (last 20 lines)
+            echo "📋 Recent logs:"
+            docker compose --env-file .env.dev -f $COMPOSE_FILE logs --tail=20 $SERVICE_NAME
+            
+            # Clean up old images
+            echo "🧹 Cleaning up..."
+            docker image prune -f
+            
+            echo "✅ Deployment completed successfully"
+      
+      - name: Deployment Success
+        run: |
+          echo "✅ Deployment to DEV completed successfully"
+          echo "📦 Build SHA: ${{ github.sha }}"
+          echo "🐳 Service: moodle-guiamaestra"
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "🧹 Cleaning up..."

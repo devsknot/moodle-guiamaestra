@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+docker-entrypoint.sh
+.dockerignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporal
+*.tmp
+*.temp
+
+# Config local (se genera en runtime)
+config.php
+
+# Node modules si existen
+node_modules
+
+# Documentación
+README.md
+CONTRIBUTING.md
+LICENSE.txt
