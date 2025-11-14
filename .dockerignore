@@ -5,7 +5,6 @@
 
 # Docker
 Dockerfile
-docker-entrypoint.sh
 .dockerignore
 
 # IDE

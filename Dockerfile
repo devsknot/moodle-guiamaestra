@@ -38,7 +38,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     zip \
     intl \
     soap \
-    xmlrpc \
     opcache \
     exif \
     pdo \
