@@ -66,23 +66,30 @@ fi
 # Verificar si Moodle está instalado
 if [ ! -f /var/www/moodledata/.moodle_installed ]; then
     echo -e "${YELLOW}Instalando Moodle...${NC}"
-    
-    # Ejecutar instalación CLI de Moodle
-    php /var/www/html/admin/cli/install_database.php \
-        --lang=es \
-        --adminuser="${MOODLE_ADMIN:-admin}" \
-        --adminpass="${MOODLE_ADMIN_PASSWORD:-Admin123!}" \
-        --adminemail="${MOODLE_ADMIN_EMAIL:-admin@example.com}" \
-        --fullname="GuiaMaestra LMS" \
-        --shortname="GuiaMaestra" \
-        --agree-license
-    
-    # Marcar como instalado
-    touch /var/www/moodledata/.moodle_installed
-    echo -e "${GREEN}✓ Moodle instalado correctamente${NC}"
+
+    if PGPASSWORD=$MOODLE_DB_PASSWORD psql -h "$MOODLE_DB_HOST" -U "$MOODLE_DB_USER" -d "$MOODLE_DB_NAME" -tA -c "SELECT 1 FROM mdl_config LIMIT 1" >/dev/null 2>&1; then
+        echo -e "${YELLOW}BD ya contiene tablas de Moodle, se omite instalación CLI${NC}"
+        touch /var/www/moodledata/.moodle_installed
+        chown www-data:www-data /var/www/moodledata/.moodle_installed
+    else
+        # Ejecutar instalación CLI de Moodle
+        php /var/www/html/admin/cli/install_database.php \
+            --lang=es \
+            --adminuser="${MOODLE_ADMIN:-admin}" \
+            --adminpass="${MOODLE_ADMIN_PASSWORD:-Admin123!}" \
+            --adminemail="${MOODLE_ADMIN_EMAIL:-admin@example.com}" \
+            --fullname="GuiaMaestra LMS" \
+            --shortname="GuiaMaestra" \
+            --agree-license
+
+        # Marcar como instalado
+        touch /var/www/moodledata/.moodle_installed
+        chown www-data:www-data /var/www/moodledata/.moodle_installed
+        echo -e "${GREEN}✓ Moodle instalado correctamente${NC}"
+    fi
 else
     echo -e "${GREEN}✓ Moodle ya está instalado${NC}"
-    
+
     # Ejecutar actualizaciones si las hay
     echo -e "${YELLOW}Verificando actualizaciones...${NC}"
     php /var/www/html/admin/cli/upgrade.php --non-interactive || true
