@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     libxslt1-dev \
     # Base de datos
     libpq-dev \
+    postgresql-client \
     # Utilidades
     git \
     unzip \
