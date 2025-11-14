@@ -46,7 +46,7 @@ global \$CFG;
 \$CFG->admin = 'admin';
 
 // Configuración de proxy reverso
-\$CFG->reverseproxy = ${MOODLE_REVERSEPROXY:-false};
+\$CFG->reverseproxy = false;
 \$CFG->sslproxy = ${MOODLE_SSLPROXY:-false};
 
 // Configuración de sesiones
