@@ -17,11 +17,11 @@ until PGPASSWORD=$MOODLE_DB_PASSWORD psql -h "$MOODLE_DB_HOST" -U "$MOODLE_DB_US
 done
 echo -e "${GREEN}✓ PostgreSQL está listo${NC}"
 
-# Verificar si config.php existe
-if [ ! -f /var/www/html/public/config.php ]; then
+# Verificar si config.php existe en la raíz (public/config.php es solo un loader)
+if [ ! -f /var/www/html/config.php ]; then
     echo -e "${YELLOW}Creando config.php...${NC}"
     
-    cat > /var/www/html/public/config.php <<EOF
+    cat > /var/www/html/config.php <<EOF
 <?php
 unset(\$CFG);
 global \$CFG;
@@ -53,11 +53,11 @@ global \$CFG;
 \$CFG->session_handler_class = '\core\session\database';
 \$CFG->session_database_acquire_lock_timeout = 120;
 
-require_once(__DIR__ . '/lib/setup.php');
+require_once(__DIR__ . '/public/lib/setup.php');
 EOF
 
-    chown www-data:www-data /var/www/html/public/config.php
-    chmod 640 /var/www/html/public/config.php
+    chown www-data:www-data /var/www/html/config.php
+    chmod 640 /var/www/html/config.php
     echo -e "${GREEN}✓ config.php creado${NC}"
 else
     echo -e "${GREEN}✓ config.php ya existe${NC}"
