@@ -92,7 +92,7 @@ else
 
     # Ejecutar actualizaciones si las hay
     echo -e "${YELLOW}Verificando actualizaciones...${NC}"
-    php /var/www/html/public/admin/cli/upgrade.php --non-interactive || true
+    php /var/www/html/admin/cli/upgrade.php --non-interactive || true
 fi
 
 # Configurar permisos finales
@@ -103,7 +103,7 @@ echo -e "${GREEN}✓ Permisos configurados${NC}"
 
 # Limpiar caché
 echo -e "${YELLOW}Limpiando caché...${NC}"
-php /var/www/html/public/admin/cli/purge_caches.php || true
+php /var/www/html/admin/cli/purge_caches.php || true
 echo -e "${GREEN}✓ Caché limpiado${NC}"
 
 echo -e "${GREEN}=== Moodle GuiaMaestra iniciado correctamente ===${NC}"
