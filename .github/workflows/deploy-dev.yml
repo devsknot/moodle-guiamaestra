@@ -62,7 +62,7 @@ jobs:
             
             # Clean Moodle cache
             echo "🧹 Cleaning Moodle cache..."
-            docker compose --env-file .env.dev -f $COMPOSE_FILE exec -T $SERVICE_NAME php /var/www/html/admin/cli/purge_caches.php || true
+            docker compose --env-file .env.dev -f $COMPOSE_FILE exec -T $SERVICE_NAME php /var/www/html/public/admin/cli/purge_caches.php || true
             
             # Show logs (last 20 lines)
             echo "📋 Recent logs:"

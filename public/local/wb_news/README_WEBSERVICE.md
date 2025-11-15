@@ -23,6 +23,11 @@ Ejecutar desde el contenedor o servidor:
 php /var/www/html/public/admin/cli/upgrade.php --non-interactive
 ```
 
+O si estás usando Docker Compose:
+```bash
+docker compose exec moodle-guiamaestra php /var/www/html/public/admin/cli/upgrade.php --non-interactive
+```
+
 Esto registrará el nuevo servicio `local_wb_news_get_news` en Moodle.
 
 ### 3. Habilitar Web Services (si no está habilitado)

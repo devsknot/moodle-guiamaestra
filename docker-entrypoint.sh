@@ -18,10 +18,10 @@ done
 echo -e "${GREEN}✓ PostgreSQL está listo${NC}"
 
 # Verificar si config.php existe
-if [ ! -f /var/www/html/config.php ]; then
+if [ ! -f /var/www/html/public/config.php ]; then
     echo -e "${YELLOW}Creando config.php...${NC}"
     
-    cat > /var/www/html/config.php <<EOF
+    cat > /var/www/html/public/config.php <<EOF
 <?php
 unset(\$CFG);
 global \$CFG;
@@ -56,8 +56,8 @@ global \$CFG;
 require_once(__DIR__ . '/lib/setup.php');
 EOF
 
-    chown www-data:www-data /var/www/html/config.php
-    chmod 640 /var/www/html/config.php
+    chown www-data:www-data /var/www/html/public/config.php
+    chmod 640 /var/www/html/public/config.php
     echo -e "${GREEN}✓ config.php creado${NC}"
 else
     echo -e "${GREEN}✓ config.php ya existe${NC}"
@@ -73,7 +73,7 @@ if [ ! -f /var/www/moodledata/.moodle_installed ]; then
         chown www-data:www-data /var/www/moodledata/.moodle_installed
     else
         # Ejecutar instalación CLI de Moodle
-        php /var/www/html/admin/cli/install_database.php \
+        php /var/www/html/public/admin/cli/install_database.php \
             --lang=es \
             --adminuser="${MOODLE_ADMIN:-admin}" \
             --adminpass="${MOODLE_ADMIN_PASSWORD:-Admin123!}" \
@@ -92,7 +92,7 @@ else
 
     # Ejecutar actualizaciones si las hay
     echo -e "${YELLOW}Verificando actualizaciones...${NC}"
-    php /var/www/html/admin/cli/upgrade.php --non-interactive || true
+    php /var/www/html/public/admin/cli/upgrade.php --non-interactive || true
 fi
 
 # Configurar permisos finales
@@ -103,7 +103,7 @@ echo -e "${GREEN}✓ Permisos configurados${NC}"
 
 # Limpiar caché
 echo -e "${YELLOW}Limpiando caché...${NC}"
-php /var/www/html/admin/cli/purge_caches.php || true
+php /var/www/html/public/admin/cli/purge_caches.php || true
 echo -e "${GREEN}✓ Caché limpiado${NC}"
 
 echo -e "${GREEN}=== Moodle GuiaMaestra iniciado correctamente ===${NC}"
