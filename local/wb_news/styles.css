@@ -1,0 +1,676 @@
+.wb_news .card-icon {
+    max-width: 100px;
+}
+
+.wb_news-light {
+    color: #fff;
+}
+
+.wb_news .card {
+    background-size: cover;
+    background-position: center;
+    min-height: 350px;
+}
+
+.wb_news .card.infoslide {
+    /* stylelint-disable-next-line declaration-no-important */
+    min-height: auto !important;
+}
+
+.wb_news .card.infoslide .infoslideimg {
+    position: relative;
+}
+
+.wb_news .wb_news_card_crosslinks {
+    min-height: unset;
+    padding: 20px 20px;
+}
+
+.wb_news .wb_news_card_crosslinks > div {
+    overflow: hidden;
+}
+
+.wb_news .card-footer {
+    border: none;
+    background: none;
+}
+
+.wb_news .masonry {
+    column-count: 4;
+    column-gap: 1rem;
+}
+.wb_news .masonry .card {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.wb_news .carousel-control-prev,
+.wb_news .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border: 0;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+}
+
+.wb_news .carousel-control-prev:hover,
+.wb_news .carousel-control-next:hover {
+    opacity: 1;
+}
+
+.wb_news .carousel-control-prev {
+    left: 10px; /* Adjust the left position as needed */
+}
+
+.wb_news .carousel-control-next {
+    right: 10px; /* Adjust the right position as needed */
+}
+
+.wb_news .wb_news-light {
+    color: #fff;
+}
+
+.wb_news-userinfo {
+    font-size: 0.82em;
+}
+
+.wb_news .carousel-inner {
+    height: 100%;
+}
+
+.wb_news .left-panel {
+    width: 50%;
+    padding: 50px;
+}
+
+.wb_news .right-panel {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wb_news .image-container {
+    position: relative;
+}
+
+.wb_news .image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.wb_news .carousel-control-prev,
+.wb_news .carousel-control-next {
+    /* stylelint-disable-next-line declaration-no-important */
+    position: static !important;
+}
+
+.wb_news .carousel-control-prev-icon,
+.wb_news .carousel-control-next-icon {
+    background-color: #000;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.wb_news .carousel-control-prev-icon::before,
+.wb_news .carousel-control-next-icon::before {
+    display: none;
+}
+
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    background-color: #e9f2f9;
+    border-color: #e9f2f9;
+    color: #004085;
+}
+.wb_news_tabcontainer,
+.section-content {
+    padding: 2rem;
+    border-radius: .25rem;
+}
+.section-content .btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+.wb_news_tabcontainer {
+    position: relative;
+    width: 100%;  /* Adjust the width as needed */
+}
+
+.wb_news_tabcontainer .rounded-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #e9f0f3;
+    border-radius: 20px;  /* Adjust the border radius as needed */
+    z-index: -1;  /* Ensure the background is behind the content */
+}
+
+.wb_news_tabcontainer .wb_news_tabscontent {
+    position: relative;
+    z-index: 1;  /* Ensure the content is above the background */
+    padding: 40px 20px;  /* Optional: Add padding for better spacing */
+}
+
+.nav-tabs.wb_news .nav-item {
+    list-style: none;
+}
+
+.wb_news.nav-tabs {
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+    border-radius: 5px;
+    padding: 3px;
+    background: #e9f0f3;
+    border-bottom: none;
+
+}
+.wb_news.nav-tabs .nav-link {
+    margin-bottom: 1px;
+    border-radius: 5px;
+    color: #547086;
+    font-weight: 600;
+}
+
+.wb_news.nav-tabs .nav-link.active {
+    background: #fff;
+    color: #005c99;
+}
+
+.wb_news .carousel-inner {
+    overflow: visible;
+}
+
+@media (min-width: 981px) {
+
+    .wb_news_tabcontainer .rounded-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 90%;
+        height: 100%;
+        background: #e9f0f3;
+        border-radius: 20px;  /* Adjust the border radius as needed */
+        z-index: -1;  /* Ensure the background is behind the content */
+    }
+
+    .wb_news_tabcontainer .wb_news_tabscontent {
+        position: relative;
+        z-index: 1;  /* Ensure the content is above the background */
+        padding: 40px 20px;  /* Optional: Add padding for better spacing */
+    }
+
+    .nav-tabs.wb_news .nav-item {
+        list-style: none;
+    }
+
+    .wb_news.nav-tabs {
+        justify-content: center;
+        width: fit-content;
+        margin: auto;
+        border-radius: 5px;
+        padding: 3px;
+        background: #e9f0f3;
+        border-bottom: none;
+
+    }
+    .wb_news.nav-tabs .nav-link {
+        margin-bottom: 1px;
+        border-radius: 5px;
+        color: #547086;
+        font-weight: 600;
+    }
+    .wb_news.nav-tabs .nav-link.active {
+        background: #fff;
+        color: #005c99;
+    }
+}
+
+.wb_news .profileimg {
+    max-width: 30px;
+    max-height: 30px;
+
+}
+
+.wb_news .card-square {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+}
+
+.wb_news .card-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.wb_news .card-img-top {
+    height: 60%;
+    width: 100%;
+    object-fit: cover;
+}
+.wb_news .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wb-news-container {
+    max-width: 100vw;
+}
+
+.wb_news .card .card-body {
+    padding: 1.25rem;
+}
+
+.wb-news-edit-single {
+    position: absolute;
+    z-index: 4;
+}
+
+.wb-news-edit-single .btn-outline-dark {
+    background-color: #fff;
+}
+
+
+@media (max-width: 767.98px) {
+
+    .wb_news .bg-imageslider {
+        /* stylelint-disable-next-line declaration-no-important */
+        position: relative !important;
+        display: block;
+        /* stylelint-disable-next-line declaration-no-important */
+        height: 250px !important;
+        /* stylelint-disable-next-line declaration-no-important */
+        width: calc(100% - 20px) !important;
+        background-size: contain;
+        border-radius: 50px;
+        left: 20px;
+    }
+
+
+    .wb_news .card .card-body {
+        padding: 0.625rem;
+    }
+}
+
+.wb_news_card_blog .card-body {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+/* Slider. */
+
+.wb_news_slide .image-container img {
+    border-bottom-left-radius: 15px;
+}
+
+/* Timeline. */
+.wb-news-timeline .container-timeline {
+    text-align: right;
+}
+.wb-news-timeline .container-timeline.right .timeline-content {
+    text-align: left;
+    margin: 40px;
+}
+.wb-news-timeline {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.wb-news-timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #edf3f8;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+.wb-news-timeline .container-timeline {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+.wb-news-timeline .container-timeline::after {
+    content: attr(data-number);
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -45px;
+    background-color: #e9f2f9;
+    color: white;
+    border: 4px solid #e9f2f9;
+    top: 65px;
+    border-radius: 50%;
+    z-index: 1;
+    text-align: center;
+    font-size: 30px;
+    line-height: 87px;
+    font-weight: bold;
+}
+.wb-news-timeline .left {
+    left: 0;
+}
+.wb-news-timeline .right {
+    left: 50%;
+}
+.wb-news-timeline .left::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 45px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+}
+.wb-news-timeline .container-timeline.right::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+.wb-news-timeline .right::after {
+    left: -46px;
+}
+.wb-news-timeline .timeline-content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+}
+
+.wb-news-timeline .left .circle {
+    right: auto;
+    left: -17px;
+}
+
+/* Timeline2. */
+@media (min-width: 768.1px) {
+    .wb-news-timeline2 {
+        position: relative;
+        max-width: inherit;
+        margin: 0;
+    }
+    .timeline2-content {
+        margin-bottom: 0;
+        height: 500px;
+        display: flex;
+        align-items: center;
+    }
+    .container-timeline2::before {
+        content: attr(data-number);
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        top: calc(50% - 45px);
+        left: 20px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 50%;
+        font-size: 36px;
+        text-align: center;
+        line-height: 90px;
+        z-index: 103;
+        border: none;
+        box-sizing: border-box;
+        filter: drop-shadow(0 1.125px 3.6px rgba(19, 16, 34, 0.03)) drop-shadow(0 2.475px 6.75px rgba(19, 16, 34, 0.06));
+    }
+    .timeline2-content {
+        background-color: white;
+        padding: 10px;
+        margin-left: 180px;
+        border-radius: 6px;
+        width: calc(100% - 80px);
+    }
+    .timeline2-content img {
+        float: left;
+        margin-right: 30px;
+        width: 30%;
+        height: auto;
+    }
+
+    .wb-news-timeline2-container {
+        margin-top: 50px;
+        min-width: 100%;
+    }
+    .wb-news-timeline2 {
+        position: relative;
+        max-width: inherit;
+        margin: 0;
+    }
+    .wb-news-timeline2::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background-color: #99b2c6;
+        top: 230px;
+        bottom: 230px;
+        left: 65px;
+        margin-left: 0;
+    }
+    .container-timeline2 {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .container-timeline2::after {
+        content: '';
+        position: absolute;
+        width: 122px;
+        height: 122px;
+        top: calc(50% - 61px);
+        left: 4px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 50%;
+        font-size: 36px;
+        text-align: center;
+        line-height: 52px;
+        border: 16px solid rgba(12, 185, 197, .2);
+        z-index: 2;
+        box-sizing: border-box;
+    }
+    .wb-news-timeline2::before {
+        z-index: 100;
+    }
+}
+
+@media (max-width: 768.1px) {
+    .wb-news-timeline2 {
+        position: relative;
+        max-width: inherit;
+        margin: 0 auto;
+    }
+    .container-timeline2::before {
+        content: attr(data-number);
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        top: 115px;
+        left: 0;
+        background-color: #fff;
+        color: #000;
+        border-radius: 50%;
+        font-size: 20px;
+        text-align: center;
+        line-height: 52px;
+        z-index: 103;
+        border: none;
+        box-sizing: border-box;
+        filter: drop-shadow(0 1.125px 3.6px rgba(19, 16, 34, 0.03)) drop-shadow(0 2.475px 6.75px rgba(19, 16, 34, 0.06));
+    }
+    .timeline2-content {
+        background-color: white;
+        padding: 10px;
+        margin-left: 25px;
+        border-radius: 6px;
+    }
+
+    .wb-news-timeline2-container {
+        margin-top: 50px;
+    }
+    .wb-news-timeline2 {
+        position: relative;
+        max-width: inherit;
+        margin: 0;
+    }
+    .wb-news-timeline2-container::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background-color: #99b2c6;
+        top: 166px;
+        bottom: 500px;
+        left: 25px;
+        margin-left: 0;
+    }
+    .container-timeline2 {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .container-timeline2::after {
+        content: '';
+        position: absolute;
+        width: 68.625px;
+        height: 68.625px;
+        top: 106px;
+        left: -9px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 50%;
+        font-size: 20.25px;
+        text-align: center;
+        line-height: 32px;
+        border: 9px solid rgba(12, 185, 197, .2);
+        z-index: 2;
+        box-sizing: border-box;
+    }
+    .wb-news-timeline2-container::before {
+        z-index: 100;
+    }
+
+    .wb-news-image-row .mainrow {
+        /* stylelint-disable-next-line declaration-no-important */
+        height: fit-content !important;
+    }
+
+    .wb-news-image-row .wb-videocolumn {
+        /* stylelint-disable-next-line declaration-no-important */
+        height: 250px !important;
+    }
+
+    .wb-news-image-row .reverseonmobile {
+        /* stylelint-disable-next-line declaration-no-important */
+        flex-direction: column-reverse !important;
+    }
+}
+
+/* core_course course-card */
+.course-card-name.bg-primary {
+    position: absolute;
+    bottom: 10px;
+    padding: 1px 15px;
+    width: 70%;
+    font-size: 24px;
+    font-weight: 600;
+    /* stylelint-disable-next-line declaration-no-important */
+    border: 1px solid #000 !important;
+}
+
+.course-card,
+.list-course-card {
+    /* stylelint-disable-next-line declaration-no-important */
+    border: 1px solid #000 !important;
+}
+
+.list-course-card {
+    min-height: 20em;
+}
+
+/* core_course, block_mycourse: course slider */
+.carousel-item .row {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-indicators {
+    position: unset;
+    margin-top: 20px;
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: stretch;
+}
+
+.carousel-item:not(.active) {
+    display: none;
+}
+
+.carousel-indicators li {
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    width: 30px;
+    height: 30px;
+    color: black;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #000;
+    background-clip: padding-box;
+    border-top: none;
+    border-bottom: none;
+    opacity: .5;
+    transition: opacity 0.6s ease;
+}

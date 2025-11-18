@@ -1,19 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace local_wb_news\external;
 
+use context_system;
 use external_api;
 use external_function_parameters;
-use external_value;
-use external_single_structure;
 use external_multiple_structure;
-use context_system;
+use external_single_structure;
+use external_value;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -22,9 +30,9 @@ require_once($CFG->libdir . '/externallib.php');
 /**
  * External API for getting news list.
  *
- * @package    local_wb_news
- * @copyright  2025 GuiaMaestra
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     local_wb_news
+ * @copyright   2025 GuiaMaestra
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_news extends external_api {
 
@@ -33,7 +41,7 @@ class get_news extends external_api {
      *
      * @return external_function_parameters
      */
-    public static function execute_parameters() {
+    public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'instanceid' => new external_value(PARAM_INT, 'ID de la instancia de noticias', VALUE_REQUIRED),
         ]);
@@ -45,30 +53,27 @@ class get_news extends external_api {
      * @param int $instanceid Instance ID
      * @return array News items
      */
-    public static function execute($instanceid) {
+    public static function execute($instanceid): array {
         global $PAGE;
 
-        // Validate parameters.
         $params = self::validate_parameters(self::execute_parameters(), [
             'instanceid' => $instanceid,
         ]);
 
-        // Set context for proper formatting.
         $context = context_system::instance();
         $PAGE->set_context($context);
         self::validate_context($context);
 
-        // Get news instance and items.
         try {
             $news = \local_wb_news\news::getinstance($params['instanceid']);
             $items = $news->return_list_of_news();
-            
+
             return [
                 'items' => $items,
                 'success' => true,
                 'message' => '',
             ];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return [
                 'items' => [],
                 'success' => false,
@@ -82,7 +87,7 @@ class get_news extends external_api {
      *
      * @return external_single_structure
      */
-    public static function execute_returns() {
+    public static function execute_returns(): external_single_structure {
         return new external_single_structure([
             'items' => new external_multiple_structure(
                 new external_single_structure([
@@ -109,7 +114,6 @@ class get_news extends external_api {
                     'json' => new external_value(PARAM_RAW, 'Additional JSON data', VALUE_OPTIONAL),
                     'timecreated' => new external_value(PARAM_INT, 'Creation timestamp'),
                     'timemodified' => new external_value(PARAM_INT, 'Modification timestamp'),
-                    // Campos adicionales que puede agregar return_list_of_news()
                     'author' => new external_value(PARAM_TEXT, 'Author name', VALUE_OPTIONAL),
                     'authorpicture' => new external_value(PARAM_URL, 'Author picture URL', VALUE_OPTIONAL),
                     'detailurl' => new external_value(PARAM_URL, 'Detail page URL', VALUE_OPTIONAL),

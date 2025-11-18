@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="enrol/cart/db" VERSION="20241015" COMMENT="XMLDB file for Moodle enrol/cart"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="enrol_cart" COMMENT="cart">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="currency" TYPE="char" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="price" TYPE="float" LENGTH="13" NOTNULL="false" SEQUENCE="false" DECIMALS="4"/>
+        <FIELD NAME="payable" TYPE="float" LENGTH="13" NOTNULL="false" SEQUENCE="false" DECIMALS="4"/>
+        <FIELD NAME="coupon_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="coupon_code" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="coupon_usage_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="coupon_discount_amount" TYPE="float" LENGTH="13" NOTNULL="false" SEQUENCE="false" DECIMALS="4"/>
+        <FIELD NAME="data" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="checkout_at" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="created_at" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="created_by" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="updated_at" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="updated_by" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="user_id" TYPE="foreign" FIELDS="user_id" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="user_id" UNIQUE="false" FIELDS="user_id"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="enrol_cart_items" COMMENT="cart items">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="cart_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="instance_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="price" TYPE="float" LENGTH="13" NOTNULL="true" SEQUENCE="false" DECIMALS="4"/>
+        <FIELD NAME="payable" TYPE="float" LENGTH="13" NOTNULL="true" SEQUENCE="false" DECIMALS="4"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="cart_id" TYPE="foreign" FIELDS="cart_id" REFTABLE="enrol_cart" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="id" UNIQUE="true" FIELDS="cart_id, instance_id"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

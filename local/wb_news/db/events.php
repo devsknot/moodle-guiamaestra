@@ -15,18 +15,16 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Plugin event observers are registered here.
  *
  * @package     local_wb_news
- * @copyright   2024 Thomas Winkler <stephan.lorbek@uni-graz.at>
+ * @category    event
+ * @copyright   2024 Wunderbyte GmbH<info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_wb_news';
-$plugin->supported = [404, 405];
-$plugin->release = '1.1.30';
-$plugin->version   = 2025110500;       // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2022041200;    // Requires this Moodle version.
-$plugin->maturity = MATURITY_ALPHA;
+$observers = [
+
+];

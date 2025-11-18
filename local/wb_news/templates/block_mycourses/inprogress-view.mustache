@@ -1,0 +1,108 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+ * @package   block_mycourses
+ * @copyright 2021 Derick Turner
+ * @author    Derick Turner
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+}}
+{{!
+    @template block_mycourses/completed-view
+
+    This template renders the completed view for the mycourses block.
+
+    Example context (json):
+    {
+        "nocourses": "/local/wb_news/img/wb.jpg"
+    }
+}}
+  <div id="paged-content-container-{{uniqid}}" data-region="paged-content-container">
+                <div id="page-container-1" data-region="page-container" class="paged-content-page-container" aria-live="polite">
+                    <div id="paged-content-page" class="mt-4" data-page="1">
+                        <ul class="list-group" id="{{uniqid}}">
+                            {{#courses}}
+                                <li class="list-course-card d-flex mb-2 flex-row align-items-stretch list-unstyled" role="listitem" data-region="course-content" data-course-id="{{id}}">
+                                    <!-- Image Section -->
+                                    <div class="col-md-4 p-0">
+                                        {{#visible}}
+                                            <a href="{{url}}" tabindex="-1">
+                                        {{/visible}}
+                                        {{^visible}}
+                                            <div class="dimmed_text">
+                                        {{/visible}}
+                                        
+                                        <div class="h-100 w-100" style="background-image: url('{{{image}}}'); background-size: cover; background-position: top; background-repeat: no-repeat">
+                                            <span class="sr-only">{{fullname}}</span>
+                                        </div>
+
+                                        {{#visible}}</a>{{/visible}}
+                                        {{^visible}}</div>{{/visible}}
+                                    </div>
+
+                                    <!-- Content Section -->
+                                    <div class="col-md-8 d-flex flex-column justify-content-between p-0">
+                                        {{#visible}}
+                                        {{/visible}}
+                                        {{^visible}}
+                                            <div class="dimmed_text">
+                                        {{/visible}}
+
+                                        {{> core_course/favouriteicon }}
+                                        <span class="sr-only">{{#str}}aria:coursename, core_course{{/str}}</span>
+                                        <h3 class="fw-bold p-2 text-center bg-primary text-white">{{{fullname}}}</h3>
+
+                                        {{#visible}}</a>{{/visible}}
+                                        {{^visible}}</div>{{/visible}}
+
+                                        <p class="pl-4 pr-4">{{{summary}}}</p>
+
+                                        {{#hasprogress}}
+                                            <div class="mt-3 pl-4">
+                                                {{> block_mycourses/progress-bar }}
+                                            </div>
+                                        {{/hasprogress}}
+
+                                        <div class="mt-3 pl-4">
+                                            <a href="{{url}}" class="btn btn-primary mb-4">{{#str}} tocourse, theme_lexa {{/str}}</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/courses}}
+
+                            {{^courses}}
+                                <li class="list-group-item course-listitem border-left-0 border-right-0 border-top-0 px-2 rounded-0" data-region="course-content">
+                                    <div class="text-xs-center text-center m-t-3">
+                                        <img class="empty-placeholder-image-lg" src="{{nocourses}}" alt="{{#str}} noinprogress, block_mycourses {{/str}}">
+                                        <p class="text-muted m-t-1">{{#str}} noinprogress, block_mycourses {{/str}}</p>
+                                    </div>
+                                </li>
+                            {{/courses}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+{{#js}}
+require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
+    var root = $('#inprogress-view-{{uniqid}}');
+    customEvents.define(root, [customEvents.events.activate]);
+    root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
+        root.find('.btn.active').removeClass('active');
+    });
+});
+{{/js}}
