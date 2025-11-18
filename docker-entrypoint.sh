@@ -17,7 +17,7 @@ until PGPASSWORD=$MOODLE_DB_PASSWORD psql -h "$MOODLE_DB_HOST" -U "$MOODLE_DB_US
 done
 echo -e "${GREEN}✓ PostgreSQL está listo${NC}"
 
-# Verificar si config.php existe en la raíz (public/config.php es solo un loader)
+# Verificar si config.php existe en la raíz
 if [ ! -f /var/www/html/config.php ]; then
     echo -e "${YELLOW}Creando config.php...${NC}"
     
@@ -53,7 +53,7 @@ global \$CFG;
 \$CFG->session_handler_class = '\core\session\database';
 \$CFG->session_database_acquire_lock_timeout = 120;
 
-require_once(__DIR__ . '/public/lib/setup.php');
+require_once(__DIR__ . '/lib/setup.php');
 EOF
 
     chown www-data:www-data /var/www/html/config.php
@@ -73,7 +73,7 @@ if [ ! -f /var/www/moodledata/.moodle_installed ]; then
         chown www-data:www-data /var/www/moodledata/.moodle_installed
     else
         # Ejecutar instalación CLI de Moodle
-        php /var/www/html/public/admin/cli/install_database.php \
+        php /var/www/html/admin/cli/install_database.php \
             --lang=es \
             --adminuser="${MOODLE_ADMIN:-admin}" \
             --adminpass="${MOODLE_ADMIN_PASSWORD:-Admin123!}" \
