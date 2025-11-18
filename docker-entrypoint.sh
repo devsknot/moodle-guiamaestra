@@ -92,7 +92,7 @@ else
 
     # Ejecutar actualizaciones si las hay
     echo -e "${YELLOW}Verificando actualizaciones...${NC}"
-    php /var/www/html/admin/cli/upgrade.php --non-interactive || true
+    php /var/www/html/admin/cli/upgrade.php --non-interactive --allow-unstable || true
 fi
 
 # Configurar permisos finales
