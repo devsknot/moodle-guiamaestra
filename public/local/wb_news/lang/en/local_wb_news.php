@@ -94,6 +94,7 @@ $string['manage'] = 'Manage';
 $string['manage_new'] = 'Create News';
 $string['navnews'] = 'News';
 $string['navnewsinstances'] = 'News instances';
+$string['instancenewsnone'] = 'This instance has no news yet.';
 $string['masonrytemplate'] = 'Masonry template';
 $string['name'] = 'Name';
 $string['news_created'] = 'News entry created';

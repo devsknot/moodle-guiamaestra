@@ -116,6 +116,9 @@ foreach ($data['instances'] as $key => $value) {
         ? get_string('noname', 'local_wb_news') : $value["name"];
     $data['instances'][$key]['shortcode'] = "[wbnews instance=" . $value["instanceid"] . "]";
     $data['instances'][$key]['isadminpage'] = true;
+
+    $iscurrent = !empty($id) && (int)$value['instanceid'] === (int)$id;
+    $data['instances'][$key]['collapseopen'] = $iscurrent;
 }
 
 $data['instances'] = array_values($data['instances']);

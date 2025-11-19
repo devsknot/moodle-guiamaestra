@@ -76,7 +76,12 @@
     <span class="h4 ml-2">{{instancenameonindex}}</span> <span>{{shortcode}}</span>
     </div>
     {{/instancenameonindex}}
-    <div id="instance-{{instanceid}}" class="card-body {{#instancenameonindex}}collapse{{/instancenameonindex}}">
+    <div id="instance-{{instanceid}}" class="card-body {{#instancenameonindex}}collapse{{/instancenameonindex}} {{#collapseopen}}show{{/collapseopen}}">
+    {{^news}}
+        <div class="alert alert-info" role="alert">
+            {{#str}} instancenewsnone, local_wb_news {{/str}}
+        </div>
+    {{/news}}
     {{#masonrytemplate}}
         {{> local_wb_news/wb_news_masonry}}
     {{/masonrytemplate}}
