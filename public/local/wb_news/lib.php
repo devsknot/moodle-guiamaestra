@@ -38,7 +38,6 @@
  */
 function local_wb_news_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     global $DB;
-
     // @codingStandardsIgnoreStart
     /*
     if ($context->contextlevel != CONTEXT_SYSTEM) {
@@ -48,11 +47,9 @@ function local_wb_news_pluginfile($course, $cm, $context, $filearea, $args, $for
 
     //require_login();
 
-
     if ($filearea != 'bgimage' && $filearea != 'icon') {
         return false;
     }
-
 
     $itemid = (int)array_shift($args);
 
@@ -79,4 +76,41 @@ function local_wb_news_pluginfile($course, $cm, $context, $filearea, $args, $for
     // finally send the file
     send_stored_file($file, 0, 0, true, $options); // download MUST be forced - security!
     // @codingStandardsIgnoreEnd
+}
+
+/**
+ * Adds the NEWS entry to the primary navigation bar.
+ *
+ * @param \navigation_node $navigation
+ * @return void
+ */
+function local_wb_news_extend_primary_navigation(\navigation_node $navigation): void {
+    $context = \context_system::instance();
+
+    if (!has_capability('local/wb_news:view', $context)) {
+        return;
+    }
+
+    if ($navigation->find('local_wb_news_nav', \navigation_node::TYPE_CUSTOM)) {
+        return;
+    }
+
+    $label = get_string('navnews', 'local_wb_news');
+    $url = new \moodle_url('/local/wb_news/index.php');
+
+    $node = \navigation_node::create(
+        $label,
+        $url,
+        \navigation_node::TYPE_CUSTOM,
+        null,
+        'local_wb_news_nav'
+    );
+    $node->showinflatnavigation = true;
+
+    if ($navigation->find('siteadmin', \navigation_node::TYPE_CONTAINER)) {
+        $navigation->add_node($node, 'siteadmin');
+        return;
+    }
+
+    $navigation->add_node($node);
 }

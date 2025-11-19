@@ -80,6 +80,7 @@ $string['keyvaluepairs'] = 'Schlüssel: Wert';
 $string['lightmode'] = 'Heller Modus';
 $string['manage'] = 'Bearbeiten';
 $string['manage_new'] = 'Neue News anlegen';
+$string['navnews'] = 'News';
 $string['masonrytemplate'] = 'Bausteine Vorlage';
 $string['name'] = 'Name';
 $string['news_created'] = 'Neuigkeiteneintrag erstellt';

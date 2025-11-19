@@ -80,6 +80,7 @@ $string['keyvaluepairs'] = 'Key: Value';
 $string['lightmode'] = 'Light Mode';
 $string['manage'] = 'Manage';
 $string['manage_new'] = 'Create News';
+$string['navnews'] = 'News';
 $string['masonrytemplate'] = 'Masonry template';
 $string['name'] = 'Name';
 $string['news_created'] = 'News entry created';

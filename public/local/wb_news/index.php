@@ -38,6 +38,9 @@ require_once($CFG->libdir . '/datalib.php');
 $context = \context_system::instance();
 $PAGE->set_context($context);
 
+require_login();
+require_capability('local/wb_news:view', $context);
+
 $id = optional_param('id', 0, PARAM_INT);
 
 $pageurl = new \moodle_url('/local/wb_news/index.php?id=' . $id);
@@ -58,18 +61,20 @@ if ($id == 0) {
 }
 $PAGE->set_title($record->title ?? 'title');
 $PAGE->set_heading($record->title ?? 'title');
+
 $PAGE->set_pagelayout('base');
 
 echo $OUTPUT->header();
 
-require_capability('local/wb_news:editinstances', context_system::instance());
-
+$cansystemmanage = has_capability('local/wb_news:manage', $context);
 $news = new wb_news($id);
 $data = $news->return_list();
 
 // phpcs:ignore
 // Here, we want the information how to include the instance:
 foreach ($data['instances'] as $key => $value) {
+
+    $data['instances'][$key]['editmode'] = false;
     if (!empty($data['instances'][$key]['contextids'])) {
         $contextids = explode(',', $data['instances'][$key]['contextids']);
         $hasaccess = false;
@@ -77,14 +82,21 @@ foreach ($data['instances'] as $key => $value) {
             if (!empty($contextid)) {
                 try {
                     $context = context::instance_by_id($contextid);
-                    if (has_capability('local/wb_news:manage', $context)) {
-                        $hasaccess = true;
+                    $canmanagecontext = has_capability('local/wb_news:manage', $context);
+                    $canviewcontext = has_capability('local/wb_news:view', $context);
+
+                    if ($canmanagecontext) {
                         $data['instances'][$key]['editmode'] = true;
+                    }
+
+                    if ($canmanagecontext || $canviewcontext) {
+                        $hasaccess = true;
                     }
                 } catch (\Exception $e) {
                     // Do nothing, we will skip this entry.
                     if (is_siteadmin()) {
                         $hasaccess = true;
+                        $data['instances'][$key]['editmode'] = true;
                     }
                 }
             } else {
@@ -97,7 +109,7 @@ foreach ($data['instances'] as $key => $value) {
             continue;
         }
     } else {
-        $data['instances'][$key]['editmode'] = true;
+        $data['instances'][$key]['editmode'] = $cansystemmanage;
     }
 
     $data['instances'][$key]['instancenameonindex'] = empty($value["name"])
@@ -108,7 +120,7 @@ foreach ($data['instances'] as $key => $value) {
 
 $data['instances'] = array_values($data['instances']);
 
-$data['editmode'] = true;
+$data['editmode'] = $cansystemmanage;
 
 echo $OUTPUT->render_from_template('local_wb_news/wb_news_container', $data);
 echo $OUTPUT->footer();
