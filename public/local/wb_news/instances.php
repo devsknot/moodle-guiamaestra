@@ -77,12 +77,21 @@ foreach ($records as $record) {
         ? userdate($lastchange, get_string('strftimedatetimeshort', 'core_langconfig'))
         : get_string('never');
 
+    $addurl = new moodle_url('/local/wb_news/index.php', ['id' => $record->id, 'add' => 1]);
+    $addbutton = html_writer::link(
+        $addurl,
+        get_string('instancesaddarticle', 'local_wb_news'),
+        ['class' => 'btn btn-primary btn-sm mr-1']
+    );
+
     $manageurl = new moodle_url('/local/wb_news/index.php', ['id' => $record->id]);
     $managebutton = html_writer::link(
         $manageurl,
         get_string('instancesmanage', 'local_wb_news'),
         ['class' => 'btn btn-secondary btn-sm']
     );
+
+    $actionbuttons = $addbutton . $managebutton;
 
     $rows[] = new html_table_row([
         format_string($record->name ?? ''),
@@ -91,7 +100,7 @@ foreach ($records as $record) {
         implode('<br>', array_map('s', $instancecontexts)),
         $articlecount,
         $lastchangeformatted,
-        $managebutton,
+        $actionbuttons,
     ]);
 }
 

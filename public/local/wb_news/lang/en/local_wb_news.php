@@ -86,6 +86,7 @@ $string['instancesarticles'] = 'Articles';
 $string['instanceslastmodified'] = 'Last change';
 $string['instancesactions'] = 'Actions';
 $string['instancesmanage'] = 'Manage articles';
+$string['instancesaddarticle'] = 'Add article';
 $string['instanceid'] = 'Instance ID';
 $string['interror'] = 'Only full numbers are allowed.';
 $string['keyvaluepairs'] = 'Key: Value';
