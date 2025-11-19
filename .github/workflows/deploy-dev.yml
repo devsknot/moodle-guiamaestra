@@ -53,7 +53,7 @@ jobs:
             # Go to infrastructure directory and rebuild
             echo "🔨 Rebuilding $SERVICE_NAME container..."
             cd $INFRASTRUCTURE_PATH
-            docker compose --env-file .env.dev -f $COMPOSE_FILE build --no-cache $SERVICE_NAME
+            docker compose --env-file .env.dev -f $COMPOSE_FILE build --no-cache --pull $SERVICE_NAME
             docker compose --env-file .env.dev -f $COMPOSE_FILE up -d --no-deps $SERVICE_NAME
             
             # Show status
