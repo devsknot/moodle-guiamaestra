@@ -108,4 +108,22 @@ function local_wb_news_extend_primary_navigation(\navigation_node $navigation): 
     $node->showinflatnavigation = true;
 
     $navigation->add_node($node);
+
+    if (has_capability('local/wb_news:manage', $context)) {
+        if (!$navigation->find('local_wb_news_instances_nav', \navigation_node::TYPE_CUSTOM)) {
+            $managelabel = get_string('navnewsinstances', 'local_wb_news');
+            $manageurl = new \moodle_url('/local/wb_news/instances.php');
+
+            $managenode = \navigation_node::create(
+                $managelabel,
+                $manageurl,
+                \navigation_node::TYPE_CUSTOM,
+                null,
+                'local_wb_news_instances_nav'
+            );
+            $managenode->showinflatnavigation = true;
+
+            $navigation->add_node($managenode);
+        }
+    }
 }
