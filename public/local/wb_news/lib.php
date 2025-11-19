@@ -107,10 +107,5 @@ function local_wb_news_extend_primary_navigation(\navigation_node $navigation): 
     );
     $node->showinflatnavigation = true;
 
-    if ($navigation->find('siteadmin', \navigation_node::TYPE_CONTAINER)) {
-        $navigation->add_node($node, 'siteadmin');
-        return;
-    }
-
     $navigation->add_node($node);
 }
