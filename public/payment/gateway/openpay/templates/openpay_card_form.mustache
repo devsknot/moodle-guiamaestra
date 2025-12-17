@@ -1,39 +1,52 @@
 <div class="paygw-openpay">
     <h4>{{#str}}cardformtitle, paygw_openpay{{/str}}</h4>
-    <p>{{#str}}cardinstructions, paygw_openpay{{/str}}</p>
+    <p class="text-muted small mb-3">{{#str}}cardinstructions, paygw_openpay{{/str}}</p>
+    <div class="alert alert-info d-none" data-region="status"></div>
 
-    <form id="paygw_openpay_card_form" name="paygw_openpay_card_form" autocomplete="off">
+    <form id="paygw_openpay_card_form" name="paygw_openpay_card_form" autocomplete="off" novalidate>
         <div class="mb-3">
             <label class="form-label" for="paygw_openpay_holder_name">{{#str}}cardholdername, paygw_openpay{{/str}}</label>
-            <input class="form-control" id="paygw_openpay_holder_name" type="text" data-openpay-card="holder_name">
+            <input class="form-control" id="paygw_openpay_holder_name" type="text" maxlength="80"
+                data-openpay-card="holder_name" required>
+            <div class="invalid-feedback" data-error-for="paygw_openpay_holder_name"></div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="paygw_openpay_card_number">{{#str}}cardnumber, paygw_openpay{{/str}}</label>
-            <input class="form-control" id="paygw_openpay_card_number" type="text" inputmode="numeric" data-openpay-card="card_number">
+            <label class="form-label d-flex align-items-center gap-2" for="paygw_openpay_card_number">
+                {{#str}}cardnumber, paygw_openpay{{/str}}
+                <span class="badge bg-light text-dark text-uppercase">Visa · MC · Amex</span>
+            </label>
+            <input class="form-control" id="paygw_openpay_card_number_display" type="text" inputmode="numeric"
+                autocomplete="cc-number" placeholder="0000 0000 0000 0000" required>
+            <input type="hidden" id="paygw_openpay_card_number" data-openpay-card="card_number">
+            <div class="invalid-feedback" data-error-for="paygw_openpay_card_number_display"></div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label" for="paygw_openpay_expiration_month">{{#str}}expmonth, paygw_openpay{{/str}}</label>
-                <input class="form-control" id="paygw_openpay_expiration_month" type="text" inputmode="numeric" data-openpay-card="expiration_month">
+                <input class="form-control" id="paygw_openpay_expiration_month" type="text" inputmode="numeric"
+                    autocomplete="cc-exp-month" data-openpay-card="expiration_month" placeholder="MM" required>
+                <div class="invalid-feedback" data-error-for="paygw_openpay_expiration_month"></div>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label" for="paygw_openpay_expiration_year">{{#str}}expyear, paygw_openpay{{/str}}</label>
-                <input class="form-control" id="paygw_openpay_expiration_year" type="text" inputmode="numeric" data-openpay-card="expiration_year">
+                <input class="form-control" id="paygw_openpay_expiration_year" type="text" inputmode="numeric"
+                    autocomplete="cc-exp-year" data-openpay-card="expiration_year" placeholder="YY" required>
+                <div class="invalid-feedback" data-error-for="paygw_openpay_expiration_year"></div>
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="paygw_openpay_cvv2">{{#str}}cvv, paygw_openpay{{/str}}</label>
-            <input class="form-control" id="paygw_openpay_cvv2" type="password" inputmode="numeric" data-openpay-card="cvv2">
+            <input class="form-control" id="paygw_openpay_cvv2" type="password" inputmode="numeric"
+                autocomplete="cc-csc" data-openpay-card="cvv2" placeholder="3-4 dígitos" required>
+            <div class="invalid-feedback" data-error-for="paygw_openpay_cvv2"></div>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
             <button type="button" class="btn btn-secondary" data-action="cancel">{{#str}}cancel, paygw_openpay{{/str}}</button>
-            <button type="submit" class="btn btn-primary" data-action="pay">{{#str}}pay, paygw_openpay{{/str}}</button>
+            <button type="submit" class="btn btn-primary" data-action="pay" disabled>{{#str}}pay, paygw_openpay{{/str}}</button>
         </div>
-
-        <div class="mt-3" data-region="status" style="display:none"></div>
     </form>
 </div>
